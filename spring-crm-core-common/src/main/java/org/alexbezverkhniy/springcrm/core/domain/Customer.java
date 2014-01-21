@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,6 +31,7 @@ public class Customer extends BaseEntity<Long> {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private Sex sex;
+	@OneToMany
 	private Set<Address> addresses; 
 	
 	public String getCode() {

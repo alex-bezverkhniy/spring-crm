@@ -1,5 +1,8 @@
 package org.alexbezverkhniy.springcrm.core.domain;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,6 +16,7 @@ import org.alexbezverkhniy.springcrm.core.domain.dictionaries.Country;
 import org.alexbezverkhniy.springcrm.core.domain.dictionaries.House;
 import org.alexbezverkhniy.springcrm.core.domain.dictionaries.Region;
 import org.alexbezverkhniy.springcrm.core.domain.dictionaries.Street;
+import org.apache.commons.lang3.time.DateUtils;
 
 @Entity
 public class Address extends BaseEntity<Long> {
@@ -45,7 +49,7 @@ public class Address extends BaseEntity<Long> {
 		this.area = area;
 		this.region = region;
 		this.country = country;
-		this.livesSince = livesSince;
+		this.livesSince = DateUtils.truncate(livesSince, Calendar.DATE);
 		this.addressType = addressType;
 	}
 
@@ -105,7 +109,7 @@ public class Address extends BaseEntity<Long> {
 		return livesSince;
 	}
 
-	public void setLivesSince(Date livesSince) {
+	public void setLivesSince(Date livesSince) {		
 		this.livesSince = livesSince;
 	}	
 	
@@ -119,11 +123,13 @@ public class Address extends BaseEntity<Long> {
 
 	@Override
 	public String toString() {
+		Format formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss.SS");
+		
 		return "Address [house=" + house + ", street=" + street + ", city="
 				+ city + ", area=" + area + ", region=" + region + ", country="
-				+ country + ", livesSince=" + livesSince + ", addressType="
-				+ addressType + ", created=" + created + ", lastModified="
-				+ lastModified + "]";
+				+ country + ", livesSince=" + formatter.format(livesSince) + ", addressType="
+				+ addressType + ", created=" + formatter.format(created) + ", lastModified="
+				+ formatter.format(lastModified) + "]";
 	}
 
 	@Override
@@ -136,8 +142,7 @@ public class Address extends BaseEntity<Long> {
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((house == null) ? 0 : house.hashCode());
-		result = prime * result
-				+ ((livesSince == null) ? 0 : livesSince.hashCode());
+		result = prime * result	+ ((livesSince == null) ? 0 : livesSince.hashCode());
 		result = prime * result + ((region == null) ? 0 : region.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		return result;

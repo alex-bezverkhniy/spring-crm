@@ -27,20 +27,22 @@ public class AddressRepositoryTest extends BaseDictionaryTester{
 	private Address address;
 	
 	@Autowired
-	private AddressRepository addressRepository;
+	private AddressRepository addressRepository;	
 	
 	@Before
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		address = new Address(house, street, city, area, region, country, new Date(), AddressType.LIVING);
-		address = addressRepository.save(address);		
+		long id = addressRepository.save(address).getId();
+		address = null;
+		address = addressRepository.findOne(id);
 	}
 
 	@After
 	@Override
 	public void tearDown() throws Exception {
-		addressRepository.delete(address);
+		addressRepository.delete(address);		
 		super.tearDown();
 	}
 
@@ -56,9 +58,13 @@ public class AddressRepositoryTest extends BaseDictionaryTester{
 		findBy(address, addresses);
 	}
 
-	private void findBy(Object entity, List<Address> result) {
-		log.info("findBy: " + entity.getClass().getSimpleName());
-		assertTrue(result.contains(entity));
+	private void findBy(Address address, List<Address> addresses) {
+		log.info("findBy: " + address.getClass().getSimpleName());
+		for (Address addr : addresses) {
+			log.info("COMPARE : \n" + addr.toString() + "\nTO\n"
+					+ address.toString());
+		}
+		assertTrue(addresses.contains(address));
 		
 	}
 	

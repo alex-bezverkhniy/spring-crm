@@ -2,6 +2,10 @@ package org.alexbezverkhniy.springcrm.core.repositories;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
+import org.alexbezverkhniy.springcrm.core.domain.dictionaries.BaseDictionary;
+import org.alexbezverkhniy.springcrm.core.domain.dictionaries.Country;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,8 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class DictionaryRepositoryTester extends BaseDictionaryTester{
 
 	@Test
-	public void testFindByName() {		
-		assertTrue(countryRepository.findByName(country.getName()).contains(country));
+	public void testFindByName() {
+		List<Country> countries =  countryRepository.findByName(country.getName());
+
+		assertTrue(countries.contains(country));
 		assertTrue(regionRepository.findByName(region.getName()).contains(region));
 		assertTrue(areaRepository.findByName(area.getName()).contains(area));
 		assertTrue(cityRepository.findByName(city.getName()).contains(city));
