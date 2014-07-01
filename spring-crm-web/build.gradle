@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+jar {
+    baseName = 'spring-crm-web'
+    version =  '0.1.0'
+}
+
+dependencies {
+    compile project(':spring-crm-common')
+}
