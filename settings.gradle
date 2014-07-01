@@ -1,0 +1,2 @@
+include "spring-crm-common", "spring-crm-rest", "spring-crm-web"
+

@@ -1,0 +1,44 @@
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+
+    group = 'org.alexbezverkhniy.springcrm'
+    version = '0.1.0'
+    description = 'CRM system'
+
+    jar {
+        baseName = 'spring-crm'
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url 'http://repo.spring.io/libs-milestone' }
+        maven { url 'https://repository.jboss.org/nexus/content/repositories/releases' }
+    }
+
+    dependencies {
+        // Logging
+        compile 'ch.qos.logback:logback-classic:1.1.2'
+        compile 'org.slf4j:slf4j-api:1.7.5'
+
+        testCompile 'ch.qos.logback:logback-classic:1.1.2'
+        testCompile 'org.slf4j:slf4j-api:1.7.5'
+
+
+        // jUnit
+        testCompile 'junit:junit:4.11'
+        testCompile 'org.databene:contiperf:2.2.0'
+    }
+
+    task 'create-dirs' << {
+        sourceSets*.java.srcDirs*.each { it.mkdirs() }
+        sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+    }
+
+    task writeClasspath() << {
+        buildDir.mkdirs()
+        new File(buildDir, "classpath.txt").text = configurations.runtime.asPath + "\n"
+    }
+}
