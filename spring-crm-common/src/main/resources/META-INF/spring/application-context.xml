@@ -30,7 +30,7 @@
 		<property name="dataSource" ref="dataSource" />
 
 		<!-- Package with Entity classes -->
-		<property name="packagesToScan" value="org.alexbezverkhniy.springcrm.core.domain" />
+		<property name="packagesToScan" value="org.alexbezverkhniy.springcrm.common.domain" />
 
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -43,7 +43,7 @@
 
     </bean>
 
-	<jpa:repositories base-package="org.alexbezverkhniy.springcrm.core.repositories"></jpa:repositories>
+	<jpa:repositories base-package="org.alexbezverkhniy.springcrm.common.repositories"></jpa:repositories>
 	
 
 </beans>

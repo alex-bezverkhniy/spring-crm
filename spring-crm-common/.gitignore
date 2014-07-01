@@ -1,0 +1,8 @@
+# IDEA Files #
+*.iml
+.idea/*.*
+
+# Package Files #
+*.jar
+*.war
+*.ear
