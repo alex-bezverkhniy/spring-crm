@@ -1,12 +1,14 @@
 package org.alexbezverkhniy.springcrm.core.domain;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @MappedSuperclass

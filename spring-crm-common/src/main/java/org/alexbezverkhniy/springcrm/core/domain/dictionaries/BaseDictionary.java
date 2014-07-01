@@ -1,5 +1,7 @@
 package org.alexbezverkhniy.springcrm.core.domain.dictionaries;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -28,9 +30,10 @@ public abstract class BaseDictionary extends BaseEntity<Long> {
 
 	@Override
 	public String toString() {
+		Format formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss.SS");
 		return this.getClass().getName() + " [id=" + getId() + ", name=" + name
-				+ ", code=" + code + ", created=" + getCreated()
-				+ ", lastModified=" + getLastModified() + "]";
+				+ ", code=" + code + ", created=" + formatter.format(getCreated())
+				+ ", lastModified=" + formatter.format(getLastModified()) + "]";
 	}
 
 	@Override

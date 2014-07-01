@@ -1,7 +1,12 @@
 package org.alexbezverkhniy.springcrm.core.repositories;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 import java.util.UUID;
 
+import org.alexbezverkhniy.springcrm.core.domain.Address;
+import org.alexbezverkhniy.springcrm.core.domain.BaseEntity;
 import org.alexbezverkhniy.springcrm.core.domain.dictionaries.Area;
 import org.alexbezverkhniy.springcrm.core.domain.dictionaries.City;
 import org.alexbezverkhniy.springcrm.core.domain.dictionaries.Country;
@@ -10,9 +15,13 @@ import org.alexbezverkhniy.springcrm.core.domain.dictionaries.Region;
 import org.alexbezverkhniy.springcrm.core.domain.dictionaries.Street;
 import org.junit.After;
 import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class BaseDictionaryTester {
+	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	protected Country country;
 	protected Region region;
@@ -70,4 +79,5 @@ public abstract class BaseDictionaryTester {
 		regionRepository.delete(region);
 		countryRepository.delete(country);		
 	}
+		
 }
