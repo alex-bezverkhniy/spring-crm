@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,8 +27,6 @@ public class CustomerRepositoryTests {
 
 	@Autowired
     CustomerRepository customerRepository;
-	@Autowired
-    UserRoleRepository userRoleRepository;
 
 	Customer customer;
 
@@ -38,7 +37,7 @@ public class CustomerRepositoryTests {
 		customer.setEmail("alexhustas@gmail.com");
 		customer.setFirstName("Firstname");
 		customer.setLastName("Lastname");
-		
+        customer.setMobilePhone("+77019400514");
 
 
 		customer = customerRepository.save(customer);
@@ -57,9 +56,10 @@ public class CustomerRepositoryTests {
 	}
 
 	@Test
+    @Transactional
 	public void findSavedCustomerByLastname() throws Exception {
 
-		List<Customer> customers = customerRepository.findByLastname("Lastname");
+		List<Customer> customers = customerRepository.findByLastName("Lastname");
 
 		assertNotNull(customers);
 		log.info("SUTOMER: ");
@@ -72,14 +72,17 @@ public class CustomerRepositoryTests {
 	@Test
 	public void findByFirstnameOrLastname() throws Exception {
 
-		List<Customer> customers = customerRepository.findByFirstnameOrLastname("Lastname");
+		List<Customer> customers = customerRepository.findByFirstNameOrLastName("Lastname");
 
 		assertTrue(customers.contains(customer));
 	}
 
+    @Test
+    public void findByMobilePhone() throws Exception {
 
+        Customer customer = customerRepository.findByMobilePhone("+77019400514");
 
+        assertEquals(customer, this.customer);
 
-
-
+    }
 }

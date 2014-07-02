@@ -26,7 +26,7 @@ public class Customer extends BaseEntity<Long> {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private Sex sex;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Address> addresses; 
 	
 	public String getCode() {
@@ -151,20 +151,14 @@ public class Customer extends BaseEntity<Long> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((birthday == null) ? 0 : birthday.hashCode());
+		result = prime * result	+ ((birthday == null) ? 0 : birthday.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result
-				+ ((contactPhone == null) ? 0 : contactPhone.hashCode());
+		result = prime * result	+ ((contactPhone == null) ? 0 : contactPhone.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result
-				+ ((middleName == null) ? 0 : middleName.hashCode());
-		result = prime * result
-				+ ((mobilePhone == null) ? 0 : mobilePhone.hashCode());
+		result = prime * result	+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result	+ ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result	+ ((middleName == null) ? 0 : middleName.hashCode());
+		result = prime * result	+ ((mobilePhone == null) ? 0 : mobilePhone.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		return result;
 	}

@@ -18,16 +18,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  *
  */
 @Entity
-@NamedQuery(name = "User.findByTheUsersName", query = "from User u where u.username = ?1")
+@NamedQuery(name = "User.findByTheUsersName", query = "from User u where u.userName = ?1")
 public class User extends AbstractPersistable<Long> {
     
 	private static final long serialVersionUID = 5833255179194698922L;
 
 	@Column(unique = true) 
-	private String username;
+	private String userName;
 
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<UserRole> roles;
@@ -40,23 +40,23 @@ public class User extends AbstractPersistable<Long> {
 		this.setId(id);
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public List<UserRole> getRoles() {

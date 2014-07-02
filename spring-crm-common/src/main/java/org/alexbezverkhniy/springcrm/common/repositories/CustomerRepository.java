@@ -1,9 +1,12 @@
 package org.alexbezverkhniy.springcrm.common.repositories;
 
 import org.alexbezverkhniy.springcrm.common.domain.Customer;
+import org.alexbezverkhniy.springcrm.common.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,18 +15,20 @@ import java.util.List;
  *
  * Created by Alex Bezverkhniy
  */
+@Repository
+@Transactional
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("select u from Customer u where u.email = ?")
     Customer findByEmail(String email);
 
-    @Query("select u from Customer u where u.firstname = ?")
-    List<Customer> findByFirstname(String firstname);
+    @Query("select u from Customer u where u.firstName = ?")
+    List<Customer> findByFirstName(String firstName);
 
-    @Query("select u from Customer u where u.lastname = ?")
-    List<Customer> findByLastname(String lastname);
+    @Query("select u from Customer u where u.lastName = ?")
+    List<Customer> findByLastName(String lastName);
 
-    @Query("select u from Customer u where u.firstname = :name or u.lastname = :name")
-    List<Customer> findByFirstnameOrLastname(@Param("name") String name);
+    @Query("select u from Customer u where u.firstName = :name or u.lastName = :name")
+    List<Customer> findByFirstNameOrLastName(@Param("name") String name);
 
     @Query("select u from Customer u where u.mobilePhone = ?")
     Customer findByMobilePhone(String mobilePhone);
@@ -36,4 +41,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query("select u from Customer u where u.contactPhone = ?")
     Customer findByContactPhone(String contactPhone);
+
 }

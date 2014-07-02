@@ -13,17 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface UserRepository extends JpaRepository<User, Long> {//CrudRepository<User, Long> {
 	
-    @Query("select u from User u where u.username = ?")
+    @Query("select u from User u where u.userName = ?")
     User findByUsername(String username);
 
-	@Query("select u from User u where u.firstname = ?")
-    List<User> findByFirstname(String firstname);
+	@Query("select u from User u where u.firstName = ?")
+    List<User> findByFirstName(String firstname);
 
-    @Query("select u from User u where u.lastname = ?")
-    List<User> findByLastname(String lastname);
+    @Query("select u from User u where u.lastName = ?")
+    List<User> findByLastName(String lastname);
 
-    @Query("select u from User u where u.firstname = :name or u.lastname = :name")
-	List<User> findByFirstnameOrLastname(@Param("name") String name);
+    @Query("select u from User u where u.firstName = :name or u.lastName = :name")
+	List<User> findByFirstNameOrLastName(@Param("name") String name);
 
     @Query("SELECT u FROM User u INNER JOIN u.roles r where r.roleName = :name")
 	List<User> findByRoleName(@Param("name") String name);

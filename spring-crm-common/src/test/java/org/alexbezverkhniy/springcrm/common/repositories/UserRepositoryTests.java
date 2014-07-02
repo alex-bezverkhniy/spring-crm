@@ -1,12 +1,5 @@
 package org.alexbezverkhniy.springcrm.common.repositories;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.alexbezverkhniy.springcrm.common.domain.User;
 import org.alexbezverkhniy.springcrm.common.domain.UserRole;
 import org.junit.After;
@@ -18,6 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 @ContextConfiguration(locations = "/META-INF/spring/application-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,9 +35,9 @@ public class UserRepositoryTests {
 	@Before
 	public void setUp() {
 		user = new User();
-		user.setUsername("alexhustas");
-		user.setFirstname("Firstname");
-		user.setLastname("Lastname");
+		user.setUserName("alexhustas");
+		user.setFirstName("Firstname");
+		user.setLastName("Lastname");
 		
 		userRole = new UserRole();
 		userRole.setRoleName("user");
@@ -68,7 +66,7 @@ public class UserRepositoryTests {
 	@Test
 	public void findSavedUserByLastname() throws Exception {
 
-		List<User> users = userRepository.findByLastname("Lastname");
+		List<User> users = userRepository.findByLastName("Lastname");
 
 		assertNotNull(users);
 		log.info("USER: ");
@@ -81,7 +79,7 @@ public class UserRepositoryTests {
 	@Test
 	public void findByFirstnameOrLastname() throws Exception {
 
-		List<User> users = userRepository.findByFirstnameOrLastname("Lastname");
+		List<User> users = userRepository.findByFirstNameOrLastName("Lastname");
 
 		assertTrue(users.contains(user));					
 	}
@@ -92,7 +90,7 @@ public class UserRepositoryTests {
 		List<User> users = userRepository.findByRoleName("user");
 		
 		for (User user : users) {
-			log.info("username: " + user.getUsername());
+			log.info("username: " + user.getUserName());
 		}
 		
 		assertTrue(users.contains(user));					
@@ -102,7 +100,7 @@ public class UserRepositoryTests {
 	@Test
 	public void addRemoveRole() throws Exception {
 
-		User user = userRepository.findByUsername(this.user.getUsername());
+		User user = userRepository.findByUsername(this.user.getUserName());
 		
 		assertNotNull(user.getRoles());
 
@@ -114,7 +112,7 @@ public class UserRepositoryTests {
 
 		user = userRepository.save(user);
 		
-		user = userRepository.findByUsername(this.user.getUsername());		
+		user = userRepository.findByUsername(this.user.getUserName());
 		log.info("user: " + user.toString());
 		
 		assertTrue(user.getRoles().size() == 2);
@@ -129,7 +127,7 @@ public class UserRepositoryTests {
 		userRoleRepository.delete(role);
 		
 		
-		user = userRepository.findByUsername(this.user.getUsername());		
+		user = userRepository.findByUsername(this.user.getUserName());
 		log.info("user: " + user.toString());
 		
 		assertTrue(user.getRoles().size() == 1);
